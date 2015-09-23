@@ -1,0 +1,50 @@
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+
+{% block body %}
+
+<div class="container">
+
+    <h2><i class="fa fa-upload"></i>&nbsp;{{"upload a transactions data file"|trans|capitalize}}</h2>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            {% if error is not empty %}
+            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> {{error}}</div>
+            {% endif %}
+            {% if saved == true %}
+            <div class="alert alert-success">{{"the file is uploaded"}}</div>
+            {% endif %}
+
+            <form role="form"  action="{{ path('upload') }}" method="post"   {{ form_enctype(form) }} novalidate>
+                <div class="form-group">
+                    <label for='account'>{{"account"|trans|capitalize}}</label>
+                        {{ form_widget(form.account, {'attr': { 'class': 'form-control', 'placeholder': 'Account Number'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for='file_type'>{{"file type"|trans|capitalize}}</label>
+                        {{ form_widget(form.file_type, {'attr': { 'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for='file'>{{"file"|trans|capitalize}}</label>
+                        {{ form_widget(form.file, {'attr': { 'class': 'form-control'}}) }}
+                    <span class="help-block alert-danger">{{ form_errors(form.file) }}</span>
+                </div>
+                 {{ form_widget(form._token) }}
+                <input type="submit" class="btn  btn-lg btn-primary" value="{{"valider"|trans|capitalize}}"/>
+            </form>
+
+            <br/>
+            <em>* {{"accepted extensions"|trans|capitalize}} : xls, txt </em>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+    {{parent()}}
+<script type="text/javascript" src='{{ asset('bundles/analyzer/js/Account.js') }}'></script>   
+
+{% endblock %}

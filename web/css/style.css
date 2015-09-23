@@ -1,0 +1,85 @@
+/* 
+    Created on : 21 févr. 2015, 20:28:05
+    Author     : Abdessamad OUERYEMCHI
+*/
+
+body {
+    font-family: 'Oxygen';
+}
+
+
+.bigTitle {
+    font-size: 20px;
+    color : white !important;
+}
+
+.top50 {
+    margin-top: 50px;
+}
+
+.bigTitle {
+    font-size: 18px;
+    color : white !important;
+}
+
+ul.borderli li {
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;
+} 
+
+.menuText {
+    /*    position: relative;
+        top: 5px;*/
+    font-weight: bold;
+    font-size: 15px;  
+}
+
+.top50 { margin-top: 50px; }
+.top5 { margin-top: 5px; }
+
+.left10 { margin-left: 10px;}
+
+.buttonTxt {
+    font-weight: bold;
+}
+
+.huge {
+    font-size: 30px;
+}
+
+.whiteC {
+    color: white !important; 
+}
+
+.bgDemo {
+    background-color: #333333;
+    color:white;
+}
+
+.general-stats  {
+    font-family: sans-serif !important;
+    font-size: 18px;
+}
+
+.general-stats tr.total {
+    background-color: #f2dede !important;
+}
+
+.general-stats th {
+    text-align: center;
+}
+.general-stats td.amount {
+    text-align: right;   
+}
+.bold {
+    font-weight: bold;
+}
+.form-title {
+    color: gray;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.trans_record:hover {
+    background-color:#e3e3e3;
+}

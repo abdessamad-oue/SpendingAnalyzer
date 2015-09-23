@@ -1,0 +1,27 @@
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+{% form_theme form 'AnalyzerBundle:Form:fields.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h2> <i class="fa  fa-diamond"></i>&nbsp; {{ ("add" == type ) ? "add a account"|trans|capitalize : "modify a account"|trans|capitalize}} : </h2>
+    <br/>
+
+    <div class="pull-right">
+        <a class="btn btn-default" href="{{path('account')}}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> &nbsp; {{"account list"|trans|capitalize}}</a>
+    </div>
+    <br/>
+    <div class="row top50">
+        <div class="col-md-6 col-md-offset-1">
+            {% if id is defined %}
+            <form class="form-horizontal" method="POST" action="{{path("setAccount", {'id' : id})}}" novalidate>
+            {% else %}
+            <form class="form-horizontal" method="POST" action="{{path("addAccount")}}" novalidate>
+            {% endif %}
+        {{ form_widget(form)}}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

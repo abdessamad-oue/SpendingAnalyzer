@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+    {{ parent()}}
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/colorbox.css' />
+{% endblock %}
+
+{% block header %}
+    {% include "AnalyzerBundle:Layout:header.html.twig" %}
+{% endblock %}
+
+{% block body %}  
+{% endblock %}
+    
+{% block js %}
+    {{ parent()}}
+    <script type="text/javascript" src='/js/jquery.colorbox.js'></script>   
+{% endblock %}
+
+
+
+

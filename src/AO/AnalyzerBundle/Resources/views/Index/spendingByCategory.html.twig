@@ -1,0 +1,41 @@
+
+{% if aReq.date_begin is not empty and aReq.date_end is not empty %}
+
+<div class="text-center">
+    <h4> {{"account type"|trans|capitalize}} : <strong>{{sAccountType|trans}}</strong> &nbsp;&nbsp;&nbsp; {{"date begin"|trans|capitalize}} : <strong>{{aReq.date_begin}}</strong> &nbsp;&nbsp;&nbsp; {{"date end"|trans|capitalize }} :  <strong>{{aReq.date_end}} </strong> </h4>
+</div>
+
+
+<table class="table table-bordered table-striped general-stats">
+    
+    <tr>
+        <th>{{"category"|trans|capitalize}}</th>
+        <th>{{"CREDIT "|trans}} €</th>
+        <th>{{"DEBIT "|trans}} €</th>
+        <th>{{"details"|trans|capitalize}}</th>
+    </tr>
+        {% for sCateg in aCategLabels %}
+    <tr>
+        <td>{{aCategLabel[sCateg]|trans}}</td>
+        <td class="amount">{{aSumCredit[sCateg]|default(0)}}</td>
+        <td class="amount">{{aSumDebit[sCateg]|default(0)}}</td>
+        <td class="text-center">
+            {% if aSumCredit[sCateg]|default(0) != 0 %}
+            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end, 'category' : sCateg, 'type' : 'credit'})}}" class="btn btn-success pull-left popup"><strong>{{"see Credit transactions"|trans}}</strong></a> 
+            {% endif %}
+            {% if aSumDebit[sCateg]|default(0) != 0 %}
+            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end,'category' : sCateg, 'type' : 'debit'})}}" class="btn btn-danger pull-right popup"><strong>{{"see Debit transactions"|trans}}</strong></a>
+            {% endif %}
+        </td>
+    </tr>
+        {% endfor %}
+    <tr class="total">
+        <td>{{"total"|trans|capitalize}}</td>
+        <td class="amount">{{nTotalCredit}}</td>
+        <td class="amount">{{nTotalDebit}}</td>
+        <td class="amount"></td>
+    </tr>
+</table>
+{% else %}
+<div class="alert alert-danger text-center">{{"empty dates !"}}</div>
+{% endif %}

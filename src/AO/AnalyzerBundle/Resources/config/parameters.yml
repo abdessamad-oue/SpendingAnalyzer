@@ -1,0 +1,22 @@
+parameters:
+    # repertoire ou stocker les fichiers XLS
+    dir_files: '/files/'
+    per_page: 20
+    # categories 
+    categories:
+        CC: 1
+        LEVY: 2
+        TRANSFER: 3
+        CASH: 4
+        CHE: 5
+        RE_CHE: 6
+        BANK_CHARGE: 7
+        
+    categorieLabel: 
+        CC: CREDIT CARD
+        LEVY: LEVY
+        TRANSFER: TRANSFER
+        CASH: CASH
+        CHE: BANK CHECK
+        RE_CHE: BANK RE CHECK
+        BANK_CHARGE: BANK CHARGE

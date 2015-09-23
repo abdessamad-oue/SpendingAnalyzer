@@ -1,0 +1,66 @@
+# traduction vers la langue française
+
+# menu
+account: compte
+upload: import
+
+# Security
+username: identifiant
+password: mot de passe
+Web application for a personal bank account spending: Application Web pour analyser les dépenses sur votre compte bancaire personnel
+bad username or password: identifiant ou mot de passe incorrect
+
+# category
+CREDIT CARD: CARTE BANCAIRE
+LEVY: PRELEVEMENT
+TRANSFER: VIREMENT
+CASH: RETRAIT
+BANK CHECK: CHEQUE
+BANK RE CHECK: REMISE CHEQUE
+BANK CHARGE: BANQUE
+
+#Home
+available accounts: compte(s) disponible(s)
+date of last data upload: date du dernier import 
+account type: Type de compte
+date begin: date de début
+date end: date de fin
+category: categorie
+details: détails
+spending by category: dépenses par catégorie
+
+DEPOSIT: DEPÔT
+SAVINGS: EPARGNE
+
+see Credit transactions: voir les opérations Crédit
+see Debit transactions: voir les opérations Débit
+
+
+# account
+available accounts list: liste des comptes disponibles
+add a account: ajouter un compte
+modify a account: modifier un compte
+comment: commentaire
+creation date: date de création
+edit: éditer
+account list: liste des comptes
+the account was modified: le compte a été modifié
+
+# Transaction
+upload a transactions data file: importer un fichier de transactions
+validate: valider
+file: fichier
+file type: type de fichier
+accepted extensions: extensions acceptées
+the file extension is refused: l'extension du fichier n'est pas accepté
+amount: montant
+wording: libellé
+filter: filtrer
+create: Créer
+create a transaction: créer une transaction
+The Transaction n° %id% was created: La transaction n° %id% été créée
+return to list: retour à la liste
+search a transaction: rechercher une transaction
+No result found: Aucun résultat trouvé
+delete: supprimer
+the transaction was modified: la transaction a été modifié

@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+<link rel='stylesheet' href='/css/bootstrap.css' />
+<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='/css/style.css' />
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="margin-top: 8%;" >
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-9">
+            <strong>{{"Language"|trans}}</strong> : <br/>
+            <div class="left10">
+                <input class='locale' type="radio" name="lang" value="en" {{ locale == 'en' ? ' checked' : ''}} /> {{"english"|trans|capitalize}} <br/>
+                <input class='locale' type="radio" name="lang" value="fr" {{ locale == 'fr' ? ' checked' : ''}} /> {{"français"|trans|capitalize}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3" style="margin-bottom: 20px">
+            <h1 class="text-center"><i class="fa fa-bar-chart text-primary">&nbsp;</i>{{ app_title }}</h1>
+            <div class="text-center text-primary">
+                <small>{{"Web application for a personal bank account spending"|trans}}</small>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3 well">
+            <form role="form"  action="{{ path('login_check') }}" method="post"  id="login_form" novalidate>
+
+                    {% if error  %}
+                <div class="alert alert-danger text-center" role="alert">{{"bad username or password"|trans|capitalize }}</div>
+                    {% endif %}  
+
+                <div class="form-group">
+                        {{ form_widget(form.username, {'attr': {'placeholder': 'username'|trans|capitalize, 'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                        {{ form_widget(form.password, {'attr': {'placeholder': 'password'|trans|capitalize, 'class': 'form-control'}}) }}
+                </div>
+                    {{ form_rest(form) }}
+                    {{ form_widget(form._token) }}
+
+                <input type="submit" class="btn btn-block btn-lg btn-primary" value='{{"Log In"|trans}}'/>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+    {{ parent()}}
+<script type="text/javascript" src="{{ asset('bundles/analyzer/js/Login.js')}}"></script> 
+
+<script type="text/javascript">
+    var Login = new Login('{{path('setLocale')}}');
+</script>
+{% endblock %}

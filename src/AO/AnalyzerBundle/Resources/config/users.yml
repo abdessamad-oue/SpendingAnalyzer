@@ -1,0 +1,3 @@
+parameters:
+    user:  { password: 95c946bf622ef93b0a211cd0fd028dfdfcf7e39e, roles: [ 'ROLE_USER' ] }
+    admin: { password: d033e22ae348aeb5660fc2140aec35850c4da997, roles: [ 'ROLE_ADMIN' ] }

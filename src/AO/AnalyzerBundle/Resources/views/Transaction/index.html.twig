@@ -1,0 +1,38 @@
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+
+{% block body %}
+
+<div class="container">
+    <div>
+      {# display the flash message  #}
+      {% for message in app.session.flashbag.get('flash_transaction') %}
+        <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ message }}</div>
+      {% endfor %}
+    </div>
+   
+    <h2><i class="fa  fa-money"></i>&nbsp;{{"transactions"|trans|capitalize}} : </h2>
+    <br/>
+
+     <div class="pull-right">
+        <a class="btn btn-primary" href="{{path('addTransaction')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;{{"create"|trans|capitalize}}</a>
+    </div>
+
+    {# basic form - filter by account and date   #}
+    {% include 'AnalyzerBundle:Form:basicForm.html.twig' with {'title' : 'search a transaction'|trans|upper}  %}
+
+    <div class="row">
+        <div id="ajaxResult" class="col-md-10"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    {{ parent()}}
+<script type="text/javascript" src="{{ asset('bundles/analyzer/js/Base.js')}}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/analyzer/js/Transaction.js')}}"></script> 
+
+<script type="text/javascript">
+    var oTransaction = new Transaction('#basicForm', "#ajaxResult", ".popup");
+</script>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+
+# we use annotation for Routing in every Controller
+IndexController:
+    resource: "@AnalyzerBundle/Controller/IndexController.php"
+    type: annotation
+    
+SecurityController:
+    resource: "@AnalyzerBundle/Controller/SecurityController.php"
+    type: annotation
+
+AccountController:
+    resource: "@AnalyzerBundle/Controller/AccountController.php"
+    type: annotation
+
+UploadController:
+    resource: "@AnalyzerBundle/Controller/UploadController.php"
+    type: annotation
+
+TransactionController:
+    resource: "@AnalyzerBundle/Controller/TransactionController.php"
+    type: annotation
+

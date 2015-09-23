@@ -1,0 +1,60 @@
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+
+{% block body %}
+
+<div class="container">
+    
+    <div>
+      {# display the flash message  #}
+      {% for message in app.session.flashbag.get('flash_account') %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    </div>
+    
+    <h2><i class="fa  fa-diamond"></i>&nbsp;{{"available accounts list"|trans|capitalize}} : </h2>
+    <br/>
+
+    <div class="pull-right">
+        <a class="btn btn-primary" href="{{path('addAccount')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;{{"add a account"|trans|capitalize}}</a>
+    </div>
+    <br/>
+    
+    {% if aAccount is empty %}
+    
+    <div class="alert alert-danger text-center top50"><span class="glyphicon glyphicon-warning-sign"></span> &nbsp; {{"no account in database"|trans|capitalize}} ! <a href="{{path('addAccount')}}" class="btn btn-link">+ {{"add a Account"|trans|capitalize}}</a> </div>
+    
+    {% else %}
+    
+    <table class="table table-bordered top50">
+        <tr>
+            <th>{{"ID"|trans}}</th>
+            <th>{{"code"|trans|capitalize}}</th>
+            <th>{{"type"|trans|capitalize}}</th>
+            <th>{{"comment"|trans|capitalize}}</th>
+            <th>{{"creation date"|trans|capitalize}}</th>
+            <th>{{"edit"|trans|capitalize}}</th>
+        </tr>
+        
+    {% for account in aAccount %}
+        <tr> 
+            <td>{{account.getId()}}</td>
+            <td>{{account.getCode()}}</td>
+            <td>{{account.getAccountType()|trans}}</td>
+            <td>{{account.getComment()}}</td>
+            <td>{{account.getCreatedAt()|date('Y-m-d H:i:s')}}</td>
+            <td><a href="{{path("setAccount", {'id' : account.getId() }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;{{"edit"|trans|capitalize}}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+    
+    
+    
+</div>
+{% endblock %}
+
+{% block js %}
+    {{parent()}}
+    <script type="text/javascript" src='{{ asset('bundles/analyzer/js/Account.js') }}'></script>   
+    
+{% endblock %}

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-11 well">
+        <p class="form-title">{{title|default('')}}</p>
+        <form role="form" id="basicForm"  class="form-inline"  action="{{ formAction }}" method="post"   {{ form_enctype(form) }} novalidate>
+
+            <div class="form-group">
+                        {{ form_widget(form.account, {'attr': { 'class': 'form-control', 'placeholder': 'Account Number'|trans}}) }}
+            </div>
+            <div class="form-group">
+                    {{ form_errors(form.date_begin)}}
+                    {{ form_widget(form.date_begin, {'attr': { 'class': 'form-control', 'placeholder': 'Date begin'|trans}}) }}
+            </div>
+            <div class="form-group">
+                    {{ form_errors(form.date_begin)}}
+                    {{ form_widget(form.date_end, {'attr': { 'class': 'form-control', 'placeholder': 'Date end'|trans}}) }}
+            </div>
+
+            {% if form.category is defined %}
+            <div class="form-group">
+                  {{ form_widget(form.category, {'attr': { 'class': 'form-control'}}) }}
+            </div>
+             {% endif %}
+            {% if form.wording is defined %}
+            <br/><br/>
+            <div class="form-group">
+                  {{ form_widget(form.wording, {'attr': { 'class': 'form-control', 'placeholder': 'wording'|trans|capitalize}}) }}
+            </div>
+             {% endif %}
+
+
+            <input  type="submit" class="btn btn-primary" value="OK">
+
+            {{ form_widget(form._token) }}
+
+        </form>
+    </div>
+</div>

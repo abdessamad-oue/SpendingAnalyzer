@@ -1,0 +1,37 @@
+{# empty Twig template #}
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+{% form_theme form 'AnalyzerBundle:Form:fields.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h2> <i class="fa fa-money"></i>&nbsp; {{  id is not defined ? "create a transaction"|trans|capitalize : "modify a transaction"|trans|capitalize}} : </h2>
+    <br/>
+
+    <div class="pull-right">
+        <a class="btn btn-default" href="{{path('transaction')}}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> &nbsp; {{"return to list"|trans|capitalize}}</a>
+    </div>
+    <br/>
+    <div class="row top50">
+        <div class="col-md-6 col-md-offset-1">
+            {% if id is defined %}
+            <form class="form-horizontal" method="POST" action="{{path("setTransaction", {'id' : id})}}" novalidate>
+            {% else %}
+            <form class="form-horizontal" method="POST" action="{{path("addTransaction")}}" novalidate>
+            {% endif %}
+                {{ form_widget(form)}}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+   {{ parent()}}
+<script type="text/javascript">
+     $("#ao_trans_date").datepicker({ 
+         dateFormat: "yy-mm-dd" 
+     });
+</script>
+{% endblock %}
+

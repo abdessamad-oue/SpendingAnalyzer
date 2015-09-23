@@ -1,0 +1,66 @@
+{% extends "AnalyzerBundle:Layout:base.html.twig"  %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+       {# <div class="col-md-5">
+            <h2 class="">{{"Spending by category"|trans}}  </h2>
+        </div>#}
+
+        <div class="col-lg-3 col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-upload fa-4x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" id="transToDo">{{ oLastDate is empty ? "No Date !!" : oLastDate|date('Y-m-d') }}</div>
+                            <div>{{"date of last data upload"|trans|capitalize}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3 whiteC">
+                            <i class="fa fa-diamond fa-4x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right whiteC">
+                            <div class="huge">{{nAccount}}</div>
+                            <div>{{"available accounts"|trans|capitalize}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {# basic form - filter by account and date   #}
+    {% include 'AnalyzerBundle:Form:basicForm.html.twig' with {'title' : 'spending by category'|trans|upper}  %}
+
+    {# results  #}
+    <div class="row">
+        <div id="ajaxResult" class="col-md-10"></div>
+    </div>
+
+
+</div>
+{% endblock %}
+
+
+{% block js %}
+    {{ parent()}}
+<script type="text/javascript" src="{{ asset('bundles/analyzer/js/Base.js')}}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/analyzer/js/Home.js')}}"></script> 
+
+<script type="text/javascript">
+    var oHome = new Home('#basicForm', "#ajaxResult", ".popup");
+</script>
+{% endblock %}
