@@ -37,14 +37,18 @@ cp app/config/parameters.yml.dist app/config/parameters.yml
 curl -s http://getcomposer.org/installer | php --
 
 ```
+### Install vendors
+
+```sh
+  cd /path/to/SpendingAnalyzer
+  php composer.phar update
+```
+
 
 Edit app/config/parameters.yml and change username and password to access to your Mysql SGBD
 
 ### Setup filesystem permissions
 
-```sh
-  cd /path/to/SpendingAnalyzer
-```
 
 ```sh
 sudo chown -R <user>:www-data app/cache app/logs app/sessions
