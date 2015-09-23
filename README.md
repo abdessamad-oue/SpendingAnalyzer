@@ -11,6 +11,9 @@ You just need a personal web server to host the application
 
 It is based on the Symfony Standard edition (2.3) 
 
+You do not have to provide your bank access!
+You can enter your transations in manually with forms or easily import all transactions via a file.
+
 ### What we can do with the App
 
  - You can see your banking by categories and by type (CREDIT  / DEBIT ) 
