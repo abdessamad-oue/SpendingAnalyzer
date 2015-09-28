@@ -51,9 +51,10 @@ Edit app/config/parameters.yml and change username and password to access to you
 
 
 ```sh
-sudo chown -R <user>:www-data app/cache app/logs app/sessions
+sudo chown -R `whoami`:www-data app/cache app/logs app/sessions app/files
 sudo chmod -R 777 app/cache app/logs app/sessions
-sudo chown -R <user>:www-data web/
+sudo chmod -R 775 app/files
+sudo chown -R `whoami`:www-data web/
 sudo chmod -R 775 web/
 ```
 
