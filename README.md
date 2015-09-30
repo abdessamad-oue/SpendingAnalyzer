@@ -37,16 +37,6 @@ cp app/config/parameters.yml.dist app/config/parameters.yml
 curl -s http://getcomposer.org/installer | php --
 
 ```
-### Install vendors
-
-```sh
-  cd /path/to/SpendingAnalyzer
-  php composer.phar update
-```
-
-
-Edit app/config/parameters.yml and change username and password to access to your Mysql SGBD
-
 ### Setup filesystem permissions
 
 
@@ -57,6 +47,19 @@ sudo chmod -R 775 app/files
 sudo chown -R `whoami`:www-data web/
 sudo chmod -R 775 web/
 ```
+
+
+### Install vendors
+
+```sh
+  cd /path/to/SpendingAnalyzer
+  php composer.phar update
+```
+
+
+Edit app/config/parameters.yml and change username and password to access to your Mysql SGBD
+
+
 
 ### DATABASE
 
