@@ -26,7 +26,7 @@ You can enter your transations in manually with forms or easily import all trans
 
  * PHP 5.4+
  * Mysql5.5+  
- * Apache2.2
+ * Apache2.2 or Apache2.4
  * composer
  
 
@@ -41,13 +41,14 @@ curl -s http://getcomposer.org/installer | php --
 
 
 ```sh
+cd /path/to/SpendingAnalyzer
+sudo mkdir app/{cache,logs,sessions,files}
 sudo chown -R `whoami`:www-data app/cache app/logs app/sessions app/files
 sudo chmod -R 777 app/cache app/logs app/sessions
 sudo chmod -R 775 app/files
 sudo chown -R `whoami`:www-data web/
 sudo chmod -R 775 web/
 ```
-
 
 ### Install vendors
 
@@ -66,8 +67,8 @@ Edit app/config/parameters.yml and change username and password to access to you
 Create database and tables :
  
 ```sh
+php app/console doctrine:database:create --env=prod
 php app/console doctrine:schema:create --env=prod
-php app/console doctrine:schema:update --force --env=prod
 ```
 
 Save a initial data 
@@ -91,7 +92,7 @@ php app/console assets:install --env=prod
 
 Create an apache virtual host :
 
-
+For Apache 2.2
 ```sh
 <VirtualHost *:80>
         ServerName YouServerName.ext
@@ -104,10 +105,31 @@ Create an apache virtual host :
                 allow from all
         </Directory>
 
+        CustomLog ${APACHE_LOG_DIR}/spending-analyzer_access.log combined
         ErrorLog ${APACHE_LOG_DIR}/spending-analyzer_error.log
 
 </VirtualHost>
 ```
+
+For Apache 2.4
+```sh
+<VirtualHost *:80>
+        ServerName YouServerName.ext
+        DocumentRoot /PATH/TO/SpendingAnalyzer/web
+
+        <Directory /PATH/TO/SpendingAnalyzer/web>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride all
+                Require all granted               
+        </Directory>
+
+        CustomLog ${APACHE_LOG_DIR}/spending-analyzer_access.log combined
+        ErrorLog ${APACHE_LOG_DIR}/spending-analyzer_error.log
+
+</VirtualHost>
+```
+
+
 Activate your vHost :
 
 ```sh
