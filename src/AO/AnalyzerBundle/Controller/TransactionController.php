@@ -26,7 +26,16 @@ class TransactionController extends BaseController
      */
     public function indexAction()
     {
-        $aAccount            = $this->accountInDatabase();
+        $oRepo    = $this->getRepoEntity('Account');
+        $aAccount = $oRepo->getAccountsListForm($this->container);
+        $nAccount = count($aAccount);
+
+        // si aucun compte dans la base de donnnée
+        if (0 == $nAccount)
+        {
+            return $this->redirect($this->generateUrl('account'));
+        }
+        
         $sDateBeginLastMonth = Help::getCustomDate('Y-m-d', 'first day of last month');
         $sDateEndLastMonth   = Help::getCustomDate('Y-m-d', 'last day of last month');
 

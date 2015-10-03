@@ -3,7 +3,7 @@
 namespace AO\AnalyzerBundle\Controller; 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use AO\AnalyzerBundle\Utils\Help;
 /**
  * Base Controller for the AnalyzerBundle
  *
@@ -22,21 +22,6 @@ class BaseController extends Controller
          return $this->getDoctrine()->getManager()->getRepository('AnalyzerBundle:'.$sEntity);
          
     }
-    
-    /**
-     * verify if we have accounts in database
-     * @return void
-     */
-    public function accountInDatabase()
-    {
-        $aAccount = $this->getRepoEntity('Account')->getAccountsListForm($this->container);
-        $nAccount = count($aAccount);
 
-        if (0 == $nAccount)
-        {
-            return $this->redirect($this->generateUrl('account'));
-        }
-        return $aAccount;
-    }
     
 }
