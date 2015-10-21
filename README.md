@@ -1,7 +1,7 @@
-Spending Analyser Web App
+Spending Analyzer Web App
 ========================
 
-Welcome to the Spending Analyser  - 
+Welcome to the Spending Analyzer  - 
 I developed this web application to 
 do a simple analysis for my personal bank account spending ..
 
@@ -141,4 +141,4 @@ Restart Apache
     sudo /etc/init.d/apache2 restart
 ```
 
-
+And that's it.  
