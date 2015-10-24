@@ -32,7 +32,7 @@
 <script type="text/javascript" src="{{ asset('bundles/analyzer/js/Transaction.js')}}"></script> 
 
 <script type="text/javascript">
-    var oTransaction = new Transaction('#basicForm', "#ajaxResult", ".popup");
+    var oTransaction = new Transaction('#basicForm', "#ajaxResult", '{{path('deleteTransactions')}}');
 </script>
 
 {% endblock %}

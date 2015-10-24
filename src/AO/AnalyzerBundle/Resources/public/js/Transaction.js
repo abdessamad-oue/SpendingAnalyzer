@@ -7,11 +7,13 @@
  * @author Abdessamad O.
  */
 
-function Transaction(formSelector, ajaxResult, popUpSelector) {
+function Transaction(formSelector, ajaxResult, deleteRoute) {
 
     try {
-        this.page =  1;
-        Base.call(this, formSelector, ajaxResult, popUpSelector);
+        this.page = 1;
+        this.formSelector = formSelector || null;
+        this.ajaxResult = ajaxResult || "#ajaxResult";
+        this.deleteRoute = deleteRoute || null;
         this.Main();
 
     }
@@ -20,10 +22,6 @@ function Transaction(formSelector, ajaxResult, popUpSelector) {
     }
 
 }
-/**
- * Heritage: Inherit class Base (by prototype)
- */
-Transaction.prototype = new Base;
 
 /**
  * Main function 
@@ -31,13 +29,38 @@ Transaction.prototype = new Base;
 Transaction.prototype.Main = function() {
     $("#date_begin").datepicker({dateFormat: "yy-mm-dd"});
     $("#date_end").datepicker({dateFormat: "yy-mm-dd"});
-    this.submitForm(this.formSelector, true, this.Pagination);
+    this.validateForm(this.formSelector);
 };
+
+
+/**
+ * submit the form
+ */
+Transaction.prototype.validateForm = function(selector) {
+    var self = this;
+    $(selector).submit(function(e) {
+
+        $(self.ajaxResult).html('Loading ...');
+        e.preventDefault();
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function(data)
+            {
+                $(self.ajaxResult).html(data);
+                self.pagination();
+                self.delete();
+            }
+        });
+    });
+};
+
 
 /**
  * pagination function 
  */
-Transaction.prototype.Pagination = function() {
+Transaction.prototype.pagination = function() {
     var self = this;
     $('#ajaxResult').on('click', 'a.page', function(e) {
         e.preventDefault();
@@ -49,11 +72,28 @@ Transaction.prototype.Pagination = function() {
             data: $('#basicForm').serialize() + '&page=' + page,
             success: function(data) {
                 $(self.ajaxResult).html(data);
+                self.delete();
             }
         });
     });
 };
 
+Transaction.prototype.delete = function() {
+    var self = this;
+    $('.deleteTrans').click(function() {
+        var id = $(this).data('id');
+        var clickedElement = this;
+        $.ajax({
+            url: self.deleteRoute,
+            type: 'POST',
+            data: {id: id},
+            success: function(data) {
+                if(data == 1) 
+                {
+                    $(clickedElement).parent().parent().remove();
+                }
+            }
+        });
+    });
 
-
-
+};

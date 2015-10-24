@@ -16,11 +16,13 @@ function Base(formSelector, ajaxResult, popupSelector) {
         this.popupSelector  = popupSelector  || ".popup";
 
         /**
-         * submit un from en ajax
-         * @param {type} selector
-         * @returns {undefined}
+         * submit form
+         * @param string selector
+         * @param boolean initPopUp
+         * @param Array ArrayCallBacks
+         * @returns void
          */
-        this.submitForm = function(selector, initPopUp, callBack) {
+        this.submitForm = function(selector, initPopUp, ArrayCallBacks) {
             var self = this;
             initPopUp = initPopUp || false;
             
@@ -35,9 +37,11 @@ function Base(formSelector, ajaxResult, popupSelector) {
                         $(self.ajaxResult).html(data);
                         if (initPopUp === true) {
                             self.initPopUp(self.popupSelector);
-                            if(callBack !== undefined)
+                            if(ArrayCallBacks !== undefined)
                             {
-                                callBack();
+                                for(i = 0; i < ArrayCallBacks.length; i++) {
+                                    ArrayCallBacks[i]();
+                                }
                             }
                         }
                     }

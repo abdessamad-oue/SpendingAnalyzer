@@ -3,7 +3,7 @@ Spending Analyzer Web App
 
 Welcome to the Spending Analyzer  - 
 I developed this web application to 
-do a simple analysis for my personal bank account spending ..
+do a simple analysis for my personal bank account spending .. ( === Quick-and-dirty === ) 
 
 I share this application with the community..
 

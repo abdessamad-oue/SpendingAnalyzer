@@ -12,6 +12,7 @@ use Doctrine\Common\Util\Debug;
 use AO\AnalyzerBundle\Form\Form\BasicForm;
 use \AO\AnalyzerBundle\Entity\Transaction;
 use AO\AnalyzerBundle\Form\Type\TransactionType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * TransactionController
@@ -26,6 +27,7 @@ class TransactionController extends BaseController
      */
     public function indexAction()
     {
+
         $oRepo    = $this->getRepoEntity('Account');
         $aAccount = $oRepo->getAccountsListForm($this->container);
         $nAccount = count($aAccount);
@@ -35,7 +37,8 @@ class TransactionController extends BaseController
         {
             return $this->redirect($this->generateUrl('account'));
         }
-        
+
+
         $sDateBeginLastMonth = Help::getCustomDate('Y-m-d', 'first day of last month');
         $sDateEndLastMonth   = Help::getCustomDate('Y-m-d', 'last day of last month');
 
@@ -151,6 +154,26 @@ class TransactionController extends BaseController
                     'nPages' => $nPages,
                     'currentPage' => $nPage
         ));
+    }
+
+    /**
+     * @Route("/transaction/delete", name="deleteTransactions")
+     */
+    public function deleteAction(Request $oRequest)
+    {
+        $id = $oRequest->request->get('id');
+        
+        $oTrans = $this->getRepoEntity('Transaction')->find($id);
+        if (is_null($oTrans))
+        {
+            return new Response(0);
+        }
+
+        $oEm = $this->getDoctrine()->getEntityManager();
+        $oEm->remove($oTrans);
+        $oEm->flush();
+
+        return new Response(1);
     }
 
 }
