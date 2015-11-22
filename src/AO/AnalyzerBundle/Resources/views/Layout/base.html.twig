@@ -16,6 +16,10 @@
 {% block js %}
     {{ parent()}}
     <script type="text/javascript" src='/js/jquery.colorbox.js'></script>   
+    <script type="text/javascript" src="{{ asset('bundles/analyzer/js/GlobalFunctions.js')}}"></script>
+    <script type="text/javascript">
+            ihmGlobals();
+    </script>
 {% endblock %}
 
 

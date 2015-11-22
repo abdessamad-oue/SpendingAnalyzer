@@ -3,13 +3,16 @@
 # menu
 account: compte
 upload: import
-
+logout: Se déconnecter
+change language: changer de langue
 # Security
 username: identifiant
 password: mot de passe
 Web application for a personal bank account spending: Application Web pour analyser les dépenses sur votre compte bancaire personnel
 bad username or password: identifiant ou mot de passe incorrect
+Log In: Se connecter
 
+    
 # category
 CREDIT CARD: CARTE BANCAIRE
 LEVY: PRELEVEMENT

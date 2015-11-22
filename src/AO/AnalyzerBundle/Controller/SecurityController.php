@@ -87,6 +87,8 @@ class SecurityController extends Controller
     }
 
     /**
+     * Change locale ( English or French )
+     * 
      *  @Route("/set_locale", name="setLocale")
      */
     public function setLocaleAction(Request $oRequest)
