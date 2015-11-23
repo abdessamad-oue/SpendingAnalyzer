@@ -15,12 +15,10 @@ function Transaction(formSelector, ajaxResult, deleteRoute) {
         this.ajaxResult = ajaxResult || "#ajaxResult";
         this.deleteRoute = deleteRoute || null;
         this.Main();
-
     }
     catch (ex) {
         console.log(ex.message);
     }
-
 }
 
 /**
@@ -30,6 +28,7 @@ Transaction.prototype.Main = function() {
     $("#date_begin").datepicker({dateFormat: "yy-mm-dd"});
     $("#date_end").datepicker({dateFormat: "yy-mm-dd"});
     this.validateForm(this.formSelector);
+    this.setTransPopUp('.addTransPopup', '#form_trans');
 };
 
 
@@ -51,6 +50,7 @@ Transaction.prototype.validateForm = function(selector) {
                 $(self.ajaxResult).html(data);
                 self.pagination();
                 self.delete();
+                self.setTransPopUp('.setTransPopup', '#form_trans');
             }
         });
     });
@@ -66,6 +66,7 @@ Transaction.prototype.pagination = function() {
         e.preventDefault();
         var page = $(this).data('page');
         self.page = page;
+        $("html, body").animate({scrollTop: 0}, "slow");
         $.ajax({
             url: $('#basicForm').attr('action'),
             type: 'POST',
@@ -73,27 +74,72 @@ Transaction.prototype.pagination = function() {
             success: function(data) {
                 $(self.ajaxResult).html(data);
                 self.delete();
+                self.setTransPopUp('.setTransPopup', '#form_trans');
             }
         });
     });
 };
 
+/**
+ * delete a transaction 
+ */
 Transaction.prototype.delete = function() {
     var self = this;
     $('.deleteTrans').click(function() {
         var id = $(this).data('id');
         var clickedElement = this;
-        $.ajax({
-            url: self.deleteRoute,
-            type: 'POST',
-            data: {id: id},
-            success: function(data) {
-                if(data == 1) 
-                {
-                    $(clickedElement).parent().parent().remove();
+        if (confirm($('#confirmQuestion').val()))
+        {
+            $.ajax({
+                url: self.deleteRoute,
+                type: 'POST',
+                data: {id: id},
+                success: function(data) {
+                    if (data == 1)
+                    {
+                        $(clickedElement).parent().parent().remove();
+                    }
                 }
-            }
-        });
+            });
+        }
     });
-
+};
+/*
+ * ColorBox popup to set a transction
+ */
+Transaction.prototype.setTransPopUp = function(linkSelector, formSelector) {
+    var self = this;
+    $(linkSelector).colorbox({
+        scrolling: true,
+        width: 750,
+        height: 700,
+        maxWidth: "95%",
+        maxHeight: "95%",
+        onComplete: function() {
+            $("#ao_trans_date").datepicker({dateFormat: "yy-mm-dd"});
+            // validation du formulaire
+            $('#ajaxResponse').on('submit', 'form' + formSelector, function(e) {
+                e.preventDefault();
+                $(formSelector).css("opacity", "0.5");
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function(data)
+                    {
+                        if (data == 1)
+                        {
+                            $.colorbox.close();
+                            $(self.formSelector).submit();
+                        }
+                        else
+                        {
+                            $("#ajaxResponse").html(data);
+                            $("#ao_trans_date").datepicker({dateFormat: "yy-mm-dd"});
+                        }
+                    }
+                });
+            });
+        }
+    });
 };

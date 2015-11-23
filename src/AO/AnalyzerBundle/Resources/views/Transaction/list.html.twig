@@ -34,7 +34,7 @@
         <nav>
             <ul class="pagination">
                 {% for i in 1..nPages %}
-                    <li class="{{ i == currentPage ? "active" : ""}}"><a   class='page' href="#"  data-page="{{i}}" >{{i}}</a></li>
+                    <li class="{{ i == currentPage ? "active" : ""}}"><a class='page' href="#"  data-page="{{i}}" >{{i}}</a></li>
                 {% endfor %}
             </ul>
         </nav>

@@ -38,7 +38,6 @@ class TransactionController extends BaseController
             return $this->redirect($this->generateUrl('account'));
         }
 
-
         $sDateBeginLastMonth = Help::getCustomDate('Y-m-d', 'first day of last month');
         $sDateEndLastMonth   = Help::getCustomDate('Y-m-d', 'last day of last month');
 
@@ -70,9 +69,7 @@ class TransactionController extends BaseController
                 $em->persist($oTrans);
                 $em->flush();
 
-                $t = $this->get('translator')->trans("The Transaction n° %id% was created", array('%id%' => $oTrans->getId()));
-                $oRequest->getSession()->getFlashBag()->add('flash_transaction', $t);
-                return $this->redirect($this->generateUrl('transaction'));
+                return new Response(1);
             }
         }
         return $this->render('AnalyzerBundle:Transaction:setTransaction.html.twig', array(
@@ -101,9 +98,7 @@ class TransactionController extends BaseController
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                $sMessage = ucfirst($this->get('translator')->trans('the transaction was modified'));
-                $oRequest->getSession()->getFlashBag()->add('flash_transaction', $sMessage);
-                return $this->redirect($this->generateUrl('transaction'));
+                return new Response(1);
             }
         }
 
@@ -162,7 +157,7 @@ class TransactionController extends BaseController
     public function deleteAction(Request $oRequest)
     {
         $id = $oRequest->request->get('id');
-        
+
         $oTrans = $this->getRepoEntity('Transaction')->find($id);
         if (is_null($oTrans))
         {

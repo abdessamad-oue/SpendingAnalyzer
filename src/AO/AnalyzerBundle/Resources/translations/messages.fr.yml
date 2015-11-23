@@ -61,9 +61,11 @@ wording: libellé
 filter: filtrer
 create: Créer
 create a transaction: créer une transaction
+modify a transaction: Modifier une transaction
 The Transaction n° %id% was created: La transaction n° %id% été créée
 return to list: retour à la liste
 search a transaction: rechercher une transaction
 No result found: Aucun résultat trouvé
 delete: supprimer
 the transaction was modified: la transaction a été modifié
+Are you sure you want to remove this transaction ?: êtes vous sûr de vouloir supprimer cette transaction ?

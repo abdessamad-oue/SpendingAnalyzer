@@ -14,7 +14,7 @@
     <br/>
 
      <div class="pull-right">
-        <a class="btn btn-primary" href="{{path('addTransaction')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;{{"create"|trans|capitalize}}</a>
+        <a class="btn btn-primary addTransPopup" href="{{path('addTransaction')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;{{"create"|trans|capitalize}}</a>
     </div>
 
     {# basic form - filter by account and date   #}
@@ -24,6 +24,7 @@
         <div id="ajaxResult" class="col-md-10"></div>
     </div>
 </div>
+<input type="hidden" id="confirmQuestion" value="{{'Are you sure you want to remove this transaction ?'|trans|capitalize}}" />
 {% endblock %}
 
 {% block js %}
