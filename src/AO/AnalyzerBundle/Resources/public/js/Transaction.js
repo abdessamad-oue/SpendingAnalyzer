@@ -37,10 +37,11 @@ Transaction.prototype.Main = function() {
  */
 Transaction.prototype.validateForm = function(selector) {
     var self = this;
+    // v$(selector).submit(function(e) {
     $(selector).submit(function(e) {
-
-        $(self.ajaxResult).html('Loading ...');
         e.preventDefault();
+        e.stopPropagation();
+        $(self.ajaxResult).html('Loading ...');
         $.ajax({
             url: this.action,
             type: this.method,
@@ -64,6 +65,7 @@ Transaction.prototype.pagination = function() {
     var self = this;
     $('#ajaxResult').on('click', 'a.page', function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         var page = $(this).data('page');
         self.page = page;
         $("html, body").animate({scrollTop: 0}, "slow");
