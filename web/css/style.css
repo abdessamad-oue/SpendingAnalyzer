@@ -4,7 +4,7 @@
 */
 
 body {
-    font-family: 'Oxygen';
+    font-family: 'Source Sans Pro', 'Oxygen';
 }
 
 
@@ -57,7 +57,8 @@ ul.borderli li {
 }
 
 .general-stats  {
-    font-family: sans-serif !important;
+    /*font-family: sans-serif !important;*/
+    font-family:  'Source Sans Pro';
     font-size: 18px;
 }
 

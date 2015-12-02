@@ -31,6 +31,8 @@ date end: date de fin
 category: categorie
 details: détails
 spending by category: dépenses par catégorie
+transaction by category: transaction par catégorie
+sum of transactions by category : somme des transactions par catégorie
 
 DEPOSIT: DEPÔT
 SAVINGS: EPARGNE
