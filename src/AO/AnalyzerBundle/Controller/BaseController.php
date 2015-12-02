@@ -20,8 +20,21 @@ class BaseController extends Controller
     public function getRepoEntity($sEntity)
     {
          return $this->getDoctrine()->getManager()->getRepository('AnalyzerBundle:'.$sEntity);
-         
     }
-
     
+    /**
+     * find a variable in php session
+     * @param string $sName
+     * @return mixed
+     */
+    public function findInSession($sName)
+    {
+        $oSession = $this->getRequest()->getSession();
+                
+        if($oSession->get($sName))
+        {
+            return $oSession->get($sName);
+        }
+        return null;
+    }
 }

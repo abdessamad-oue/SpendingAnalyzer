@@ -30,16 +30,22 @@ class IndexController extends BaseController
         $aAccount = $oRepo->getAccountsListForm($this->container);
         $nAccount = count($aAccount);
 
+        $aLastSearch = $this->findInSession('lastSearch');
+
         // si aucun compte dans la base de donnnée
         if (0 == $nAccount)
         {
             return $this->redirect($this->generateUrl('account'));
         }
 
-        $sDateBeginLastMonth = Help::getCustomDate('Y-m-d', 'first day of last month');
-        $sDateEndLastMonth   = Help::getCustomDate('Y-m-d', 'last day of last month');
-
-        $oForm = $this->createForm(new BasicForm($aAccount, $sDateBeginLastMonth, $sDateEndLastMonth));
+        $sDateBegin = Help::getCustomDate('Y-m-d', 'first day of last month');
+        $sDateEnd   = Help::getCustomDate('Y-m-d', 'last day of last month');
+        if (!empty($aLastSearch))
+        {
+            $sDateBegin =  $aLastSearch['date_begin'];
+            $sDateEnd =  $aLastSearch['date_end'];
+        }
+        $oForm = $this->createForm(new BasicForm($aAccount, $sDateBegin, $sDateEnd));
 
         $oRep = $this->getRepoEntity('Transaction');
         $oObj = $oRep->getLastTransaction();
@@ -49,7 +55,7 @@ class IndexController extends BaseController
         return $this->render('AnalyzerBundle:Index:index.html.twig', array(
                     'oLastDate' => $oLastDate,
                     'form' => $oForm->createView(),
-                    'formAction' =>$this->generateUrl('basicStatistics'),
+                    'formAction' => $this->generateUrl('basicStatistics'),
                     'nAccount' => $nAccount
         ));
     }
@@ -72,15 +78,16 @@ class IndexController extends BaseController
             $oDateBegin = new \DateTime($aRequest['date_begin']);
             $oDateEnd   = new \DateTime($aRequest['date_end']);
 
+
+            $this->getRequest()->getSession()->set('lastSearch', $aRequest);
+
             $sAccountType = $oAccount->getAccountType()->getCode();
             $oRep         = $this->getRepoEntity('Transaction');
 
             $aSumDebit  = $this->formatSumArray($oRep->SumByCategory($oAccount, $oDateBegin, $oDateEnd, 'DEBIT'));
             $aSumCredit = $this->formatSumArray($oRep->SumByCategory($oAccount, $oDateBegin, $oDateEnd, 'CREDIT'));
         }
-        
-      //  Help::pr($aSumCredit);
-        
+
         return $this->render('AnalyzerBundle:Index:spendingByCategory.html.twig', array(
                     'aReq' => $aRequest,
                     'aCategLabel' => $this->container->getParameter('categorieLabel'),

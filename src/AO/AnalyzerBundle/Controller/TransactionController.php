@@ -31,19 +31,25 @@ class TransactionController extends BaseController
         $oRepo    = $this->getRepoEntity('Account');
         $aAccount = $oRepo->getAccountsListForm($this->container);
         $nAccount = count($aAccount);
-
+        $aLastSearch = $this->findInSession('lastSearch');
         // si aucun compte dans la base de donnnée
         if (0 == $nAccount)
         {
             return $this->redirect($this->generateUrl('account'));
         }
 
-        $sDateBeginLastMonth = Help::getCustomDate('Y-m-d', 'first day of last month');
-        $sDateEndLastMonth   = Help::getCustomDate('Y-m-d', 'last day of last month');
+        $sDateBegin = Help::getCustomDate('Y-m-d', 'first day of last month');
+        $sDateEnd   = Help::getCustomDate('Y-m-d', 'last day of last month');
+        if (!empty($aLastSearch))
+        {
+            $sDateBegin = $aLastSearch['date_begin'];
+            $sDateEnd   = $aLastSearch['date_end'];
+        }
+
 
         $aCategories = $this->getRepoEntity('Category')->getCategories($this->container);
 
-        $oForm = $this->createForm(new BasicForm($aAccount, $sDateBeginLastMonth, $sDateEndLastMonth, $aCategories, true));
+        $oForm = $this->createForm(new BasicForm($aAccount, $sDateBegin, $sDateEnd, $aCategories, true));
 
         return $this->render('AnalyzerBundle:Transaction:index.html.twig', array(
                     'form' => $oForm->createView(),
