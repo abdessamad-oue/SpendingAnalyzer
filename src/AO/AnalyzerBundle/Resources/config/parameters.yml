@@ -13,10 +13,24 @@ parameters:
         BANK_CHARGE: 7
         
     categorieLabel: 
-        CC: CREDIT CARD
-        LEVY: LEVY
-        TRANSFER: TRANSFER
-        CASH: CASH
-        CHE: BANK CHECK
-        RE_CHE: BANK RE CHECK
-        BANK_CHARGE: BANK CHARGE
+        CC: 
+            label: CREDIT CARD
+            icon: fa fa-cc-visa
+        LEVY:
+            label: LEVY
+            icon: fa fa-sign-out
+        TRANSFER:
+            label: TRANSFER
+            icon : fa fa-sign-in
+        CASH:
+            label: CASH
+            icon: fa fa-money
+        CHE: 
+            label: BANK CHECK
+            icon: fa fa-pencil-square-o
+        RE_CHE: 
+            label: BANK RE CHECK
+            icon: fa fa-pencil-square-o
+        BANK_CHARGE: 
+            label: BANK CHARGE
+            icon: fa fa-bank

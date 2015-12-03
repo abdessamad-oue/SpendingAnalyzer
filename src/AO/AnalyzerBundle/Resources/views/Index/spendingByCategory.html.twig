@@ -16,15 +16,15 @@
     </tr>
         {% for sCateg in aCategLabels %}
     <tr>
-        <td>{{aCategLabel[sCateg]|trans}}</td>
+        <th><i class="{{aCategLabel[sCateg]['icon']}}"></i><span class="categTh">{{aCategLabel[sCateg]['label']|trans}}</span></th>
         <td class="amount">{{aSumCredit[sCateg]|default(0)}}</td>
         <td class="amount">{{aSumDebit[sCateg]|default(0)}}</td>
         <td class="text-center">
             {% if aSumCredit[sCateg]|default(0) != 0 %}
-            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end, 'category' : sCateg, 'type' : 'credit'})}}" class="btn btn-success pull-left popup"><strong>{{"see Credit transactions"|trans}}</strong></a> 
+            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end, 'category' : sCateg, 'type' : 'credit'})}}" class="btn btn-success pull-left popup"><strong><i class="fa fa-level-up"></i> {{"see Credit transactions"|trans}}</strong></a> 
             {% endif %}
             {% if aSumDebit[sCateg]|default(0) != 0 %}
-            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end,'category' : sCateg, 'type' : 'debit'})}}" class="btn btn-danger pull-right popup"><strong>{{"see Debit transactions"|trans}}</strong></a>
+            <a href="{{path('transactionList', {'account' : aReq.account , 'date_begin' : aReq.date_begin, 'date_end' : aReq.date_end,'category' : sCateg, 'type' : 'debit'})}}" class="btn btn-danger pull-right popup"><strong><i class="fa fa-level-down"></i> {{"see Debit transactions"|trans}}</strong></a>
             {% endif %}
         </td>
     </tr>

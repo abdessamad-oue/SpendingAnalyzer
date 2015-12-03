@@ -66,7 +66,7 @@ ul.borderli li {
     background-color: #f2dede !important;
 }
 
-.general-stats th {
+.general-stats {
     text-align: center;
 }
 .general-stats td.amount {
@@ -83,4 +83,8 @@ ul.borderli li {
 
 .trans_record:hover {
     background-color:#e3e3e3;
+}
+.categTh {
+    font-size: 15px;
+    margin-left: 10px;
 }
