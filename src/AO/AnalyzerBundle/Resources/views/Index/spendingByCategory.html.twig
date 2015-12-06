@@ -31,9 +31,9 @@
         {% endfor %}
     <tr class="total">
         <td>{{"total"|trans|capitalize}}</td>
-        <td class="amount">{{nTotalCredit}}</td>
-        <td class="amount">{{nTotalDebit}}</td>
-        <td class="amount"></td>
+        <td class="amount bold">{{nTotalCredit}}</td>
+        <td class="amount bold">{{nTotalDebit}}</td>
+        <td class="amount"><span class="bold">{{ nTotalCredit + nTotalDebit }} €</span></td>
     </tr>
 </table>
 {% else %}
