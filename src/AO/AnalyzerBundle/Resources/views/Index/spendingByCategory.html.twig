@@ -5,9 +5,7 @@
     <h4> {{"account type"|trans|capitalize}} : <strong>{{sAccountType|trans}}</strong> &nbsp;&nbsp;&nbsp; {{"date begin"|trans|capitalize}} : <strong>{{aReq.date_begin}}</strong> &nbsp;&nbsp;&nbsp; {{"date end"|trans|capitalize }} :  <strong>{{aReq.date_end}} </strong> </h4>
 </div>
 
-
-<table class="table table-bordered table-striped general-stats">
-    
+<table class="table table-bordered table-striped general-stats">    
     <tr>
         <th>{{"category"|trans|capitalize}}</th>
         <th>{{"CREDIT "|trans}} €</th>
@@ -33,7 +31,7 @@
         <td>{{"total"|trans|capitalize}}</td>
         <td class="amount bold">{{nTotalCredit}}</td>
         <td class="amount bold">{{nTotalDebit}}</td>
-        <td class="amount"><span class="bold">{{ nTotalCredit + nTotalDebit }} €</span></td>
+        <td class="amount"><span style="color:gray">{{ nTotalCredit + nTotalDebit }}€</span></td>
     </tr>
 </table>
 {% else %}
