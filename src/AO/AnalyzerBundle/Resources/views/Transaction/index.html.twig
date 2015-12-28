@@ -21,10 +21,10 @@
     {% include 'AnalyzerBundle:Form:basicForm.html.twig' with {'title' : 'search a transaction'|trans|upper}  %}
 
     <div class="row">
-        <div id="ajaxResult" class="col-md-10"></div>
+        <div id="ajaxResult" class="col-md-11"></div>
     </div>
 </div>
-<input type="hidden" id="confirmQuestion" value="{{'Are you sure you want to remove this transaction ?'|trans|capitalize}}" />
+<input type="hidden" id="confirmQuestion" value="{{'you confirm deleting transactions'|trans|capitalize}}" />
 {% endblock %}
 
 {% block js %}

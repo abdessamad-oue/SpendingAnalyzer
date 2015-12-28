@@ -17,6 +17,8 @@ body {
     margin-top: 50px;
 }
 
+.bottom10 { margin-bottom: 10px;}
+
 .bigTitle {
     font-size: 18px;
     color : white !important;

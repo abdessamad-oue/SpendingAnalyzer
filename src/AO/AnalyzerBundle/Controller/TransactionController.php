@@ -28,9 +28,9 @@ class TransactionController extends BaseController
     public function indexAction()
     {
 
-        $oRepo    = $this->getRepoEntity('Account');
-        $aAccount = $oRepo->getAccountsListForm($this->container);
-        $nAccount = count($aAccount);
+        $oRepo       = $this->getRepoEntity('Account');
+        $aAccount    = $oRepo->getAccountsListForm($this->container);
+        $nAccount    = count($aAccount);
         $aLastSearch = $this->findInSession('lastSearch');
         // si aucun compte dans la base de donnnée
         if (0 == $nAccount)
@@ -45,8 +45,6 @@ class TransactionController extends BaseController
             $sDateBegin = $aLastSearch['date_begin'];
             $sDateEnd   = $aLastSearch['date_end'];
         }
-
-
         $aCategories = $this->getRepoEntity('Category')->getCategories($this->container);
 
         $oForm = $this->createForm(new BasicForm($aAccount, $sDateBegin, $sDateEnd, $aCategories, true));
@@ -162,18 +160,24 @@ class TransactionController extends BaseController
      */
     public function deleteAction(Request $oRequest)
     {
-        $id = $oRequest->request->get('id');
-
-        $oTrans = $this->getRepoEntity('Transaction')->find($id);
-        if (is_null($oTrans))
+        $ids = $oRequest->request->get('transactionsId');
+        
+        if(empty($ids))
         {
             return new Response(0);
         }
-
+        
         $oEm = $this->getDoctrine()->getEntityManager();
-        $oEm->remove($oTrans);
+        foreach ($ids as $id)
+        {
+            $oTrans = $this->getRepoEntity('Transaction')->find($id);
+            if (is_null($oTrans))
+            {
+                continue;
+            }
+            $oEm->remove($oTrans);
+        }
         $oEm->flush();
-
         return new Response(1);
     }
 

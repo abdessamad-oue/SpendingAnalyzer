@@ -29,6 +29,7 @@ Transaction.prototype.Main = function() {
     $("#date_end").datepicker({dateFormat: "yy-mm-dd"});
     this.validateForm(this.formSelector);
     this.setTransPopUp('.addTransPopup', '#form_trans');
+
 };
 
 
@@ -52,6 +53,7 @@ Transaction.prototype.validateForm = function(selector) {
                 self.pagination();
                 self.delete();
                 self.setTransPopUp('.setTransPopup', '#form_trans');
+                self.checkAll();
             }
         });
     });
@@ -82,27 +84,48 @@ Transaction.prototype.pagination = function() {
     });
 };
 
+
+Transaction.prototype.checkAll = function() {
+
+    $('.checkAll').change(function() {
+        $('input:checkbox').prop('checked', $(this).prop("checked"));
+    });
+};
+
 /**
  * delete a transaction 
  */
 Transaction.prototype.delete = function() {
     var self = this;
     $('.deleteTrans').click(function() {
-        var id = $(this).data('id');
-        var clickedElement = this;
-        if (confirm($('#confirmQuestion').val()))
+
+        var aTrans = [];
+
+        $('input[name="transToDelete"]:checkbox').each(function() {
+
+            if ($(this).prop("checked"))
+            {
+                aTrans.push($(this).data('id'));
+            }
+        });
+
+        if (aTrans.length > 0)
         {
-            $.ajax({
-                url: self.deleteRoute,
-                type: 'POST',
-                data: {id: id},
-                success: function(data) {
-                    if (data == 1)
-                    {
-                        $(clickedElement).parent().parent().remove();
+            var clickedElement = this;
+            if (confirm($('#confirmQuestion').val()))
+            {
+                $.ajax({
+                    url: self.deleteRoute,
+                    type: 'POST',
+                    data: {transactionsId: aTrans},
+                    success: function(data) {
+                        if (data == 1)
+                        {
+                            $(clickedElement).parent().parent().remove();
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     });
 };

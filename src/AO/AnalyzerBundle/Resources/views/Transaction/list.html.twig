@@ -1,6 +1,11 @@
 
 {% if aoTransactions is iterable and aoTransactions.TotalRecordCount > 0 %}
 <div class="">
+    <button  class="btn btn-danger bottom10 deleteTrans"><span class="glyphicon glyphicon-trash"></span> {{"delete"|trans|capitalize}}</button> &nbsp;
+    <div class="bottom10 pull-right">
+        {{"check all / uncheck all"|trans|capitalize}} <input type="checkbox" name="checkall" class="checkAll"/> 
+    </div>
+
     <table class="table table-bordered">
         <tr>
             <th style="width:5%">{{'ID'|trans|capitalize}}</th>
@@ -19,7 +24,8 @@
             <td style="width:40%">{{oTrans.getWording()}}</td>
             <td style="width:10%">{{oTrans.getAmount()}}</td>
             <td style="width:5%"><a href="{{path('setTransaction', {'id' : oTrans.getId() })}}" class="btn btn-primary setTransPopup"><span class="glyphicon glyphicon-edit"></span></a></td>
-            <td style="width:5%"><button data-id="{{oTrans.getId()}}" class="btn btn-danger deleteTrans" ><span class="glyphicon glyphicon-trash"></span></button></td>
+{#            <td style="width:5%"><button data-id="{{oTrans.getId()}}" class="btn btn-danger deleteTrans" ><span class="glyphicon glyphicon-trash"></span></button></td>#}
+            <td style="width:5%; text-align: center"><input data-id="{{oTrans.getId()}}" name="transToDelete" type="checkbox" ></td>
         </tr>
     {% endfor %}
     </table>
@@ -34,7 +40,7 @@
         <nav>
             <ul class="pagination">
                 {% for i in 1..nPages %}
-                    <li class="{{ i == currentPage ? "active" : ""}}"><a class='page' href="#"  data-page="{{i}}" >{{i}}</a></li>
+                <li class="{{ i == currentPage ? "active" : ""}}"><a class='page' href="#"  data-page="{{i}}" >{{i}}</a></li>
                 {% endfor %}
             </ul>
         </nav>
